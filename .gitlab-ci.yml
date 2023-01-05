@@ -75,7 +75,7 @@ Verificar deploy:
     - Deploy wordpress
   script:
     - sleep 10
-    - curl -v http://localhost:8000
+    - curl -v http://3.131.18.234:8000
     - echo $?
 
 notificar sucesso: &notificacao

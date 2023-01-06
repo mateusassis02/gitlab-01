@@ -50,11 +50,11 @@ build:
         if [ -e "/storage/wordpress/html" ]
         then
           echo " o diretorio existe"
-          sudo rsync -avh --progress wordpress/* /storage/wordpress/html/
+          sudo cp -rp wordpress/* /storage/wordpress/html/
         else
           echo " o diretorio não existe, vamos fazer deploy"
           sudo mkdir -p /storage/wordpress/html/
-          sudo rsync -avh --progress wordpress/* /storage/wordpress/html/
+          sudo cp -rp wordpress/* /storage/wordpress/html/
         fi
 
 Deploy wordpress: &deploy
@@ -64,7 +64,10 @@ Deploy wordpress: &deploy
   only:
     variables:
       - $EXECUTAR == "deploy"
+      - $teste == "teste"
   script:
+    - pwd && ls -l
+    - hostname && id
     - docker-compose down
     - sleep 10
     - docker-compose up -d
